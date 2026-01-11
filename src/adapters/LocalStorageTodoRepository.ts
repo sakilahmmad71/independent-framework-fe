@@ -20,9 +20,16 @@ export class LocalStorageTodoRepository implements TodoRepository {
     const data = localStorage.getItem(this.STORAGE_KEY);
     if (!data) return [];
     
-    const todos = JSON.parse(data);
+    const todos = JSON.parse(data) as Array<{
+      id: string;
+      title: string;
+      description: string;
+      completed: boolean;
+      createdAt: string;
+      updatedAt: string;
+    }>;
     // Convert date strings back to Date objects
-    return todos.map((t: any) => ({
+    return todos.map((t) => ({
       ...t,
       createdAt: new Date(t.createdAt),
       updatedAt: new Date(t.updatedAt),
