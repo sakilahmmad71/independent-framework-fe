@@ -97,7 +97,7 @@ export class TodoService {
    * @returns {string} Unique ID
    */
   generateId() {
-    return `todo_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    return `todo_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
   }
 
   /**
