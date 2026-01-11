@@ -1,0 +1,28 @@
+{
+  "name": "independent-framework-fe",
+  "version": "1.0.0",
+  "description": "Framework-independent frontend architecture - Build apps where business logic is separate from UI framework",
+  "type": "module",
+  "main": "src/core/index.js",
+  "scripts": {
+    "test": "node tests/run-tests.js",
+    "test:watch": "nodemon --watch src --watch tests tests/run-tests.js"
+  },
+  "keywords": [
+    "framework-agnostic",
+    "architecture",
+    "react",
+    "vue",
+    "clean-architecture",
+    "separation-of-concerns",
+    "business-logic"
+  ],
+  "author": "",
+  "license": "MIT",
+  "exports": {
+    ".": "./src/core/index.js",
+    "./core": "./src/core/index.js",
+    "./adapters/react": "./src/adapters/react/index.js",
+    "./adapters/vue": "./src/adapters/vue/index.js"
+  }
+}
