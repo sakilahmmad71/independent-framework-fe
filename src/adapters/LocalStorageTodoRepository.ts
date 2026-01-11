@@ -11,9 +11,11 @@ export class LocalStorageTodoRepository implements TodoRepository {
 
   constructor() {
     const todos = this.loadFromStorage();
-    this.nextId = todos.length > 0 
-      ? Math.max(...todos.map(t => parseInt(t.id))) + 1 
-      : 1;
+    // Find the highest numeric ID, defaulting to 0 if none exist or all are non-numeric
+    const numericIds = todos
+      .map(t => parseInt(t.id, 10))
+      .filter(id => !isNaN(id));
+    this.nextId = numericIds.length > 0 ? Math.max(...numericIds) + 1 : 1;
   }
 
   private loadFromStorage(): Todo[] {

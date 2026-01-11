@@ -59,6 +59,11 @@ describe('TodoUseCase', () => {
       const created = await todoUseCase.createTodo({ title: 'Original', description: 'Test' });
       await expect(todoUseCase.updateTodo(created.id, { title: '' })).rejects.toThrow('Todo title cannot be empty');
     });
+
+    it('should reject title with less than 3 characters on update', async () => {
+      const created = await todoUseCase.createTodo({ title: 'Original', description: 'Test' });
+      await expect(todoUseCase.updateTodo(created.id, { title: 'ab' })).rejects.toThrow('Todo title must be at least 3 characters');
+    });
   });
 
   describe('toggleTodo', () => {

@@ -55,7 +55,14 @@ export class AuthUseCase {
   async checkAuth(): Promise<void> {
     const isAuth = await this.repository.isAuthenticated();
     if (isAuth) {
-      this.currentUser = await this.repository.getCurrentUser();
+      const user = await this.repository.getCurrentUser();
+      // Only update user if we actually got one back
+      if (user) {
+        this.currentUser = user;
+      } else {
+        // If authenticated but no user, something is wrong - clear state
+        this.currentUser = null;
+      }
     } else {
       this.currentUser = null;
     }

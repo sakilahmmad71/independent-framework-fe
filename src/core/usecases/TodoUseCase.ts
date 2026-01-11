@@ -57,6 +57,11 @@ export class TodoUseCase {
       throw new Error('Todo title cannot be empty');
     }
 
+    // Business rule: If updating title, it must be at least 3 characters
+    if (input.title !== undefined && input.title.trim().length < 3) {
+      throw new Error('Todo title must be at least 3 characters');
+    }
+
     const todo = await this.repository.update(id, input);
     const index = this.todos.findIndex(t => t.id === id);
     if (index !== -1) {
